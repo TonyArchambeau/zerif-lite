@@ -147,6 +147,13 @@ function zerif_setup()
 	
 		/* woocommerce support */
 		add_theme_support( 'woocommerce' );
+		
+	/**
+	* Welcome screen
+	*/
+	if ( is_admin() ) {
+		require get_template_directory() . '/inc/admin/welcome-screen/welcome-screen.php';
+	}
 
 }
 
@@ -346,6 +353,11 @@ function zerif_scripts()
 
         wp_enqueue_script('comment-reply');
 
+    }
+
+    /* parallax effect */
+    if ( !wp_is_mobile() ){
+        wp_enqueue_script( 'zerif_parallax', get_template_directory_uri() . '/js/parallax.js', array("jquery"), 'v1', true  );
     }
 
 	add_editor_style('/css/custom-editor-style.css');
@@ -575,17 +587,13 @@ function zerif_ourfocus_widget_scripts()
 
 class zerif_ourfocus extends WP_Widget
 {
-
-
-    function zerif_ourfocus()
-    {
-
-        $widget_ops = array('classname' => 'ctUp-ads');
-
-        $this->WP_Widget('ctUp-ads-widget', 'Zerif - Our focus widget', $widget_ops);
-
-    }
-
+	
+	public function __construct() {
+		parent::__construct(
+			'ctUp-ads-widget',
+			__( 'Zerif - Our focus widget', 'zerif-lite' )
+		);
+	}
 
     function widget($args, $instance)
     {
@@ -758,16 +766,12 @@ function zerif_testimonial_widget_scripts()
 class zerif_testimonial_widget extends WP_Widget
 {
 
-
-    function zerif_testimonial_widget()
-    {
-
-        $widget_ops = array('classname' => 'zerif_testim');
-
-        $this->WP_Widget('zerif_testim-widget', 'Zerif - Testimonial widget', $widget_ops);
-
-    }
-
+	public function __construct() {
+		parent::__construct(
+			'zerif_testim-widget',
+			__( 'Zerif - Testimonial widget', 'zerif-lite' )
+		);
+	}
 
     function widget($args, $instance)
     {
@@ -978,15 +982,12 @@ function zerif_clients_widget_scripts()
 class zerif_clients_widget extends WP_Widget
 {
 
-
-    function zerif_clients_widget()
-    {
-
-        $widget_ops = array('classname' => 'zerif_clients');
-
-        $this->WP_Widget('zerif_clients-widget', 'Zerif - Clients widget', $widget_ops);
-
-    }
+	public function __construct() {
+		parent::__construct(
+			'zerif_clients-widget',
+			__( 'Zerif - Clients widget', 'zerif-lite' )
+		);
+	}
 
 
     function widget($args, $instance)
@@ -1108,16 +1109,12 @@ function zerif_team_widget_scripts()
 class zerif_team_widget extends WP_Widget
 {
 
-
-    function zerif_team_widget()
-    {
-
-        $widget_ops = array('classname' => 'zerif_team');
-
-        $this->WP_Widget('zerif_team-widget', 'Zerif - Team member widget', $widget_ops);
-
-    }
-
+	public function __construct() {
+		parent::__construct(
+			'zerif_team-widget',
+			__( 'Zerif - Team member widget', 'zerif-lite' )
+		);
+	}
 
     function widget($args, $instance)
     {
