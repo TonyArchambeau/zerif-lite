@@ -179,9 +179,9 @@ function zerif_widgets_init()
 
         'after_widget' => '</aside>',
 
-        'before_title' => '<h1 class="widget-title">',
+        'before_title' => '<h2 class="widget-title">',
 
-        'after_title' => '</h1>',
+        'after_title' => '</h2>',
 
     ));
 
@@ -195,9 +195,9 @@ function zerif_widgets_init()
 
         'after_widget' => '',
 
-        'before_title' => '<h1 class="widget-title">',
+        'before_title' => '<h2 class="widget-title">',
 
-        'after_title' => '</h1>',
+        'after_title' => '</h2>',
 
     ));
 
@@ -211,9 +211,9 @@ function zerif_widgets_init()
 
         'after_widget' => '</aside>',
 
-        'before_title' => '<h1 class="widget-title">',
+        'before_title' => '<h2 class="widget-title">',
 
-        'after_title' => '</h1>',
+        'after_title' => '</h2>',
 
     ));
 
@@ -227,9 +227,9 @@ function zerif_widgets_init()
 
         'after_widget' => '',
 
-        'before_title' => '<h1 class="widget-title">',
+        'before_title' => '<h2 class="widget-title">',
 
-        'after_title' => '</h1>',
+        'after_title' => '</h2>',
 
     ));
 
@@ -243,9 +243,9 @@ function zerif_widgets_init()
 
         'after_widget' => '',
 
-        'before_title' => '<h1 class="widget-title">',
+        'before_title' => '<h2 class="widget-title">',
 
-        'after_title' => '</h1>',
+        'after_title' => '</h2>',
 
     ));
 
@@ -626,7 +626,7 @@ class zerif_ourfocus extends WP_Widget
             </div>
 			<?php endif; ?>
 
-            <h5 class="red-border-bottom"><?php if( !empty($instance['title']) ): echo apply_filters('widget_title', $instance['title']); endif; ?></h5>
+            <h3 class="red-border-bottom"><?php if( !empty($instance['title']) ): echo apply_filters('widget_title', $instance['title']); endif; ?></h3>
             <!-- FOCUS HEADING -->
 
 
@@ -716,7 +716,7 @@ class zerif_ourfocus extends WP_Widget
 
             if ( !empty($instance['image_uri']) ) :
 
-                echo '<img class="custom_media_image" src="' . $instance['image_uri'] . '" style="margin:0;padding:0;max-width:100px;float:left;display:inline-block" /><br />';
+                echo '<img class="custom_media_image" src="' . $instance['image_uri'] . '" style="margin:0;padding:0;max-width:100px;float:left;display:inline-block" alt="'.__( 'Uploaded image', 'zerif-lite' ).'" /><br />';
 
             endif;
 
@@ -780,7 +780,10 @@ class zerif_testimonial_widget extends WP_Widget
 
 
         echo $before_widget;
-
+		
+		$zerif_accessibility = get_theme_mod('zerif_accessibility');
+		// open link in a new tab when checkbox "accessibility" is not ticked
+		$attribut_new_tab = (isset($zerif_accessibility) && ($zerif_accessibility != 1) ? ' target="_blank"' : '' );
         ?>
 
 
@@ -809,7 +812,7 @@ class zerif_testimonial_widget extends WP_Widget
 
                 <div class="client-info">
 
-					<a class="client-name" target="_blank" <?php if( !empty($instance['link']) ): echo 'href="'.esc_url($instance['link']).'"'; endif; ?>><?php if( !empty($instance['title']) ): echo apply_filters('widget_title', $instance['title'] ); endif; ?></a>
+					<a<?php echo $attribut_new_tab; ?> class="client-name" <?php if( !empty($instance['link']) ): echo 'href="'.esc_url($instance['link']).'"'; endif; ?>><?php if( !empty($instance['title']) ): echo apply_filters('widget_title', $instance['title'] ); endif; ?></a>
 					
 
 					<?php if( !empty($instance['details']) ): ?>
@@ -828,7 +831,7 @@ class zerif_testimonial_widget extends WP_Widget
 
 					echo '<div class="client-image hidden-xs">';
 
-					echo '<img src="' . esc_url($instance['image_uri']) . '" alt="">';
+					echo '<img src="' . esc_url($instance['image_uri']) . '" alt="'.__( 'Uploaded image', 'zerif-lite' ).'" />';
 
 					echo '</div>';
 				endif;	
@@ -928,7 +931,7 @@ class zerif_testimonial_widget extends WP_Widget
 
             if ( !empty($instance['image_uri']) ) :
 
-                echo '<img class="custom_media_image_testimonial" src="' . $instance['image_uri'] . '" style="margin:0;padding:0;max-width:100px;float:left;display:inline-block" /><br />';
+                echo '<img class="custom_media_image_testimonial" src="' . $instance['image_uri'] . '" style="margin:0;padding:0;max-width:100px;float:left;display:inline-block" alt="'.__( 'Uploaded image', 'zerif-lite' ).'" /><br />';
 
             endif;
 
@@ -998,7 +1001,7 @@ class zerif_clients_widget extends WP_Widget
         ?>
 
         <a href="<?php if( !empty($instance['link']) ): echo apply_filters('widget_title', $instance['link']); endif; ?>"><img
-                src="<?php if( !empty($instance['image_uri']) ): echo esc_url($instance['image_uri']); endif; ?>" alt="Client"></a>
+                src="<?php if( !empty($instance['image_uri']) ): echo esc_url($instance['image_uri']); endif; ?>" alt="<?php _e( 'Client', 'zerif-lite' ); ?>"></a>
 
 
 
@@ -1055,7 +1058,7 @@ class zerif_clients_widget extends WP_Widget
 
             if ( !empty($instance['image_uri']) ) :
 
-                echo '<img class="custom_media_image_clients" src="' . $instance['image_uri'] . '" style="margin:0;padding:0;max-width:100px;float:left;display:inline-block" /><br />';
+                echo '<img class="custom_media_image_clients" src="' . $instance['image_uri'] . '" style="margin:0;padding:0;max-width:100px;float:left;display:inline-block" alt="'.__( 'Uploaded image', 'zerif-lite' ).'" /><br />';
 
             endif;
 
@@ -1135,7 +1138,7 @@ class zerif_team_widget extends WP_Widget
 					<figure class="profile-pic">
 
 
-						<img src="<?php echo esc_url($instance['image_uri']); ?>" alt="">
+						<img src="<?php echo esc_url($instance['image_uri']); ?>" alt="<?php _e( 'Uploaded image', 'zerif-lite' ); ?>" />
 
 
 					</figure>
@@ -1147,7 +1150,7 @@ class zerif_team_widget extends WP_Widget
 
 					<?php if( !empty($instance['name']) ): ?>
 					
-						<h5 class="dark-text red-border-bottom"><?php echo apply_filters('widget_title', $instance['name']); ?></h5>
+						<h3 class="dark-text red-border-bottom"><?php echo apply_filters('widget_title', $instance['name']); ?></h3>
 						
 					<?php endif; ?>	
 
@@ -1369,7 +1372,7 @@ class zerif_team_widget extends WP_Widget
 
             if ( !empty($instance['image_uri']) ) :
 
-                echo '<img class="custom_media_image_team" src="' . $instance['image_uri'] . '" style="margin:0;padding:0;max-width:100px;float:left;display:inline-block" /><br />';
+                echo '<img class="custom_media_image_team" src="' . $instance['image_uri'] . '" style="margin:0;padding:0;max-width:100px;float:left;display:inline-block" alt="'.__( 'Uploaded image', 'zerif-lite' ).'" /><br />';
 
             endif;
 
@@ -1413,6 +1416,212 @@ function zerif_excerpt_more( $more ) {
 	return '<a href="'.get_permalink().'">[...]</a>';
 }
 add_filter('excerpt_more', 'zerif_excerpt_more');
+
+/**************************/
+/**** More themes *********/
+/**************************/
+
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
+// Add stylesheet and JS for upsell page.
+function zerif_upsell_style() {
+	wp_enqueue_style( 'upsell-style', get_template_directory_uri() . '/css/upsell.css');
+}
+
+// Add upsell page to the menu.
+function zerif_lite_add_upsell() {
+	$page = add_theme_page(
+		__( 'More Themes', 'zerif-lite' ),
+		__( 'More Themes', 'zerif-lite' ),
+		'administrator',
+		'zerif-lite-themes',
+		'zerif_lite_display_upsell'
+	);
+
+	add_action( 'admin_print_styles-' . $page, 'zerif_upsell_style' );
+}
+add_action( 'admin_menu', 'zerif_lite_add_upsell', 11 );
+
+// Define markup for the upsell page.
+function zerif_lite_display_upsell() {
+
+	// Set template directory uri
+	$directory_uri = get_template_directory_uri();
+	
+	$zerif_accessibility = get_theme_mod('zerif_accessibility');
+	// open link in a new tab when checkbox "accessibility" is not ticked
+	$attribut_new_tab = (isset($zerif_accessibility) && ($zerif_accessibility != 1) ? ' target="_blank"' : '' );
+	?>
+	<div class="wrap">
+		<div class="container-fluid">
+			<div id="upsell_container">
+				<div class="row">
+					<div id="upsell_header" class="col-md-12">
+						<h2>
+							<a<?php echo $attribut_new_tab; ?> href="https://themeisle.com">
+								<img src="<?php echo get_template_directory_uri(); ?>/images/logo-themeisle.png" alt="<?php _e( 'Themeisle logo', 'zerif-lite' ); ?>" />
+							</a>
+						</h2>
+
+						<h3><?php _e( 'Simple and effective products, no complex frameworks, no drag & drop builders.', 'zerif-lite' ); ?></h3>
+					</div>
+				</div>
+
+				<div id="upsell_themes" class="row">
+					<?php
+					// Set the argument array with author name.
+					$args = array(
+						'author' => 'codeinwp',
+					);
+
+					// Set the $request array.
+					$request = array(
+						'body' => array(
+							'action'  => 'query_themes',
+							'request' => serialize( (object)$args )
+						)
+					);
+					$themes = zerif_get_themes( $request );
+					$active_theme = wp_get_theme()->get( 'Name' );
+					$counter = 1;
+
+					// For currently active theme.
+					foreach ( $themes->themes as $theme ) {
+						if( $active_theme == $theme->name ) {?>
+
+							<div id="<?php echo $theme->slug; ?>" class="theme-container col-md-6 col-lg-4">
+								<div class="image-container">
+									<img class="theme-screenshot" src="<?php echo $theme->screenshot_url ?>" alt="<?php _e( 'Theme screenshot', 'zerif-lite' ); ?>" />
+
+									<div class="theme-description">
+										<p><?php echo $theme->description; ?></p>
+									</div>
+								</div>
+								<div class="theme-details active">
+									<span class="theme-name"><?php echo $theme->name . ':' . __( 'Current theme', 'zerif-lite' ); ?></span>
+									<a class="button button-secondary customize right"<?php echo $attribut_new_tab; ?> href="<?php echo get_site_url(). '/wp-admin/customize.php' ?>">Customize</a>
+								</div>
+							</div>
+
+						<?php
+						$counter++;
+						break;
+						}
+					}
+
+					// For all other themes.
+					foreach ( $themes->themes as $theme ) {
+						if( $active_theme != $theme->name ) {
+
+							// Set the argument array with author name.
+							$args = array(
+								'slug' => $theme->slug,
+							);
+
+							// Set the $request array.
+							$request = array(
+								'body' => array(
+									'action'  => 'theme_information',
+									'request' => serialize( (object)$args )
+								)
+							);
+
+							$theme_details = zerif_get_themes( $request );
+							?>
+
+							<div id="<?php echo $theme->slug; ?>" class="theme-container col-md-6 col-lg-4 <?php echo $counter % 3 == 1 ? 'no-left-megin' : ""; ?>">
+								<div class="image-container">
+									<img class="theme-screenshot" src="<?php echo $theme->screenshot_url ?>" alt="<?php _e( 'Theme screenshot', 'zerif-lite' ); ?>" />
+
+									<div class="theme-description">
+										<p><?php echo $theme->description; ?></p>
+									</div>
+								</div>
+								<div class="theme-details">
+									<span class="theme-name"><?php echo $theme->name; ?></span>
+
+									<!-- Check if the theme is installed -->
+									<?php if( wp_get_theme( $theme->slug )->exists() ) { ?>
+
+										<!-- Show the tick image notifying the theme is already installed. -->
+										<img data-toggle="tooltip" title="<?php _e( 'Already installed', 'zerif-lite' ); ?>" data-placement="bottom" class="theme-exists" src="<?php echo $directory_uri ?>/core/images/tick.png" alt="<?php _e( 'Already installed', 'zerif-lite' ); ?>" />
+
+										<!-- Activate Button -->
+										<a  class="button button-primary activate right"
+											href="<?php echo wp_nonce_url( admin_url( 'themes.php?action=activate&amp;stylesheet=' . urlencode( $theme->slug ) ), 'switch-theme_' . $theme->slug );?>" >Activate</a>
+									<?php }
+									else {
+
+										// Set the install url for the theme.
+										$install_url = add_query_arg( array(
+												'action' => 'install-theme',
+												'theme'  => $theme->slug,
+											), self_admin_url( 'update.php' ) );
+									?>
+										<!-- Install Button -->
+										<a data-toggle="tooltip" data-placement="bottom" title="<?php echo 'Downloaded ' . number_format( $theme_details->downloaded ) . ' times'; ?>" class="button button-primary install right" href="<?php echo esc_url( wp_nonce_url( $install_url, 'install-theme_' . $theme->slug ) ); ?>" ><?php _e( 'Install Now', 'zerif-lite' ); ?></a>
+									<?php } ?>
+
+									<!-- Preview button -->
+									<a<?php echo $attribut_new_tab; ?> class="button button-secondary preview right" href="<?php echo $theme->preview_url; ?>"><?php _e( 'Live Preview', 'zerif-lite' ); ?></a>
+								</div>
+							</div>
+							<?php
+							$counter++;
+						}
+					}?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		jQuery(function () {
+			jQuery('.download').tooltip();
+			jQuery('.theme-exists').tooltip();
+		});
+	</script>
+<?php
+}
+
+// Get all themeisle themes by using API.
+function zerif_get_themes( $request ) {
+
+	// Generate a cache key that would hold the response for this request:
+	$key = 'zerif-lite_' . md5( serialize( $request ) );
+
+	// Check transient. If it's there - use that, if not re fetch the theme
+	if ( false === ( $themes = get_transient( $key ) ) ) {
+
+		// Transient expired/does not exist. Send request to the API.
+		$response = wp_remote_post( 'http://api.wordpress.org/themes/info/1.0/', $request );
+
+		// Check for the error.
+		if ( !is_wp_error( $response ) ) {
+
+			$themes = unserialize( wp_remote_retrieve_body( $response ) );
+
+			if ( !is_object( $themes ) && !is_array( $themes ) ) {
+
+				// Response body does not contain an object/array
+				return new WP_Error( 'theme_api_error', 'An unexpected error has occurred' );
+			}
+
+			// Set transient for next time... keep it for 24 hours should be good
+			set_transient( $key, $themes, 60 * 60 * 24 );
+		}
+		else {
+			// Error object returned
+			return $response;
+		}
+	}
+
+	return $themes;
+}
+
 
 /* Enqueue Google reCAPTCHA scripts */
 add_action( 'wp_enqueue_scripts', 'recaptcha_scripts' );
